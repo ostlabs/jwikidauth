@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install type="component" version="1.5.0">
+  <name>Wikid Auth</name>
+  <author>OSTLabs Inc</author>
+  <creationDate>08/05/2010</creationDate>
+  <copyright>OSTLabs Inc.</copyright>
+  <license>GPL</license>
+  <authorEmail>jason.kendall@ostlabs.com</authorEmail>
+  <authorUrl>http://www.ostlabs.com</authorUrl>
+  <version>0.01</version>
+  <description/>
+  <files>
+    <file>controller.php</file>
+    <file>wikidauth.php</file>
+    <file>wikidauth.xml</file>
+    <folder>libs</folder>
+    <folder>helpers</folder>
+  </files>
+</install>
