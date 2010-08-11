@@ -5,25 +5,25 @@
 /**
  * WiKID Strong Authentication module for PHP
  *
- * http://sourceforge.net/projects/wikid-twofactor/
+ * http://sourceforge.net/projects/wikid-twofactor/ 
  *
  * This is the core SSL client for WiKID Authentication.  wClient manages
- * communication between Network Clients (NC) and the WiKID Authentication
+ * communication between Network Clients (NC) and the WiKID Authentication 
  * Server (wAuth).
  *
- * Other versions of wClient support persistance of the SSL socket connection
+ * Other versions of wClient support persistance of the SSL socket connection 
 
- * to improve the performance of the communications, by avoiding the overhead
- * of the SSL and RSA key generation and negotiation.  However, because PHP
- * does not currently support persistance of socket handles, via $_SESSION or
- * any other means, we must incur this overhead on each connection to the
+ * to improve the performance of the communications, by avoiding the overhead 
+ * of the SSL and RSA key generation and negotiation.  However, because PHP 
+ * does not currently support persistance of socket handles, via $_SESSION or 
+ * any other means, we must incur this overhead on each connection to the 
  * wAuth server.
  *
  * Auth_WiKID and wClient refer to the same module.
  *
  * Requires PHP >= 4.3.2, for ssl socket communications.
  *
- * PHP versions 4 and 5
+ * PHP versions 4 and 5 
  *
  * LICENSE: Lesser GNU Public License
  *
@@ -31,16 +31,16 @@
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
  * version 2.1 of the License, or (at your option) any later version.
- *
+ * 
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- *
+ * 
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
- *
+ * 
  * @category    Authentication
  * @package     Auth_WiKID
  * @author      Greg Haygood <ghaygood@wikidsystems.com>
@@ -58,7 +58,7 @@
  * @package     Auth_WiKID
  * @author      Greg Haygood <ghaygood@wikidsystems.com>
  * @copyright   2001-2005 WiKID Systems, Inc.  All rights reserved.
- * @license     LGPL http://www.gnu.org/copyleft/lesser.html
+ * @license     LGPL http://www.gnu.org/copyleft/lesser.html 
  * @version     Release: @package_version@
  * @link        http://pear.php.net/package/Auth_WiKID
  *
@@ -82,14 +82,14 @@ class wClient
     var $_isConnected = false;
 
     /**
-     * Path to PEM-encoded certificate+key file for client certificate
+     * Path to PEM-encoded certificate+key file for client certificate 
      * authentication with wAuth
      *
      * @var string
      * @access private
      */
     var $_keyfile;
-
+    
     /**
      * Passphrase for {@link $_keyfile}
      *
@@ -97,7 +97,7 @@ class wClient
      * @access private
      */
     var $_keypass;
-
+    
     /**
      * IP address or hostname to wAuth server
      *
@@ -121,7 +121,7 @@ class wClient
      * @access private
      */
     var $_cafile = "/opt/WiKID/private/WiKIDCA.cer";
-
+    
     /**
      * Idle time to allow before closing socket, and time limit on socket open attempt
      *
@@ -139,34 +139,34 @@ class wClient
     var $_DEBUG = false;
 
     /**
-     * This constructor allows the wClient module to be initialized from
+     * This constructor allows the wClient module to be initialized from 
      * either a properties file or via explicit arguments.
      *
-     * @param string $host_or_file   Either the IP address or hostname of
-     *                               the wAuth server, or the path to a
+     * @param string $host_or_file   Either the IP address or hostname of 
+     *                               the wAuth server, or the path to a 
      *                               properties file
-     * @param int $port              The SSL listener port for the wAuth
+     * @param int $port              The SSL listener port for the wAuth 
      *                               daemon on the wAuth server
-     * @param string $keyfile        The PKCS12 keystore generated for this
+     * @param string $keyfile        The PKCS12 keystore generated for this 
      *                               client by the wAuth server
      * @param string $pass           The passphrase securing the keys in keyfile
-     * @param string $cafile         The certificate authority store for
+     * @param string $cafile         The certificate authority store for 
      *                               validating the wAuth server certificate
      *
-     * The contents of the propertiesfile should contain the following
+     * The contents of the propertiesfile should contain the following 
      * key-value pairs:
      * <ul>
      *   <li> host - The IP address or hostname of the wAuth server
-     *   <li> port - The SSL listener port for the wAuth daemon on the
+     *   <li> port - The SSL listener port for the wAuth daemon on the 
      *               wAuth server
-     *   <li> keyfile - The PKCS12 keystore generated for $this->client by
+     *   <li> keyfile - The PKCS12 keystore generated for $this->client by 
      *               the wAuth server
      *   <li> pass - The passphrase securing the keys in keyfile
-     *   <li> cafile - The PEM-encoded certificate file for validating the wAuth
+     *   <li> cafile - The PEM-encoded certificate file for validating the wAuth 
      *                  server certificate
      * </ul>
      */
-    function wClient($host_or_file, $port = 0, $keyfile = '', $keypass = '',
+    function wClient($host_or_file, $port = 0, $keyfile = '', $keypass = '', 
                      $cafile = '')
     {
         $min_version = "4.3.2";
@@ -201,7 +201,7 @@ class wClient
 
     /**
      * Class destructor, which just calls close().
-     *
+     * 
      * @access public
      */
     function __destroy()
@@ -211,7 +211,7 @@ class wClient
 
     /**
      * This method simply closes the connection to the wAuth.
-     *
+     * 
      * @access public
      */
     function close()
@@ -227,7 +227,7 @@ class wClient
 
     /**
      * This method checks that the certificates are readable.
-     *
+     * 
      * @access private
      */
     function _init()
@@ -282,7 +282,7 @@ class wClient
 				$xml = $this->send($send);
 		}
 
-		function _request($mesg)
+		function _request($mesg) 
 		{
 			$response = '';
 			if ($this->_socket) {
@@ -304,7 +304,7 @@ class wClient
 
     /**
      * This method reconnects to the wAuth server, if the socket handle is dead.
-     *
+     * 
      * @return boolean              Whether the socket is connected
      * @access private
      */
@@ -360,11 +360,11 @@ class wClient
             $this->_dprint("Opening socket ...");
             if (function_exists("stream_socket_client")) {
                 $this->_socket = stream_socket_client("tls://".$this->_host.":".$this->_port,
-                                            $errno, $errstr, $this->_timeout,
+                                            $errno, $errstr, $this->_timeout, 
                                             STREAM_CLIENT_CONNECT, $context);
             } else {
                 $this->_socket = fsockopen("tls://".$this->_host, $this->_port,
-                                            $errno, $errstr, $this->_timeout,
+                                            $errno, $errstr, $this->_timeout, 
                                             $context);
             }
             $this->_dprint("Socket handle: '$this->socket'");
@@ -383,7 +383,7 @@ class wClient
 
     /**
      * This method initiates the connection to the wAuth server.
-     *
+     * 
      * @return boolean              Whether the socket is connected
      * @access private
      */
@@ -394,6 +394,7 @@ class wClient
         // The client initiates the transaction
         $send = "CONNECT:0: wClientConnPHP $this->version";
 				$send = '<transaction> <type>1</type> <data> <client-string>wClient PHP 3.0</client-string> <server-string>null</server-string> <result>null</result> </data> </transaction>
+
 ';
 				$xml = $this->send($send);
 				$result = $xml->data->result;
@@ -410,7 +411,7 @@ class wClient
 
     /**
      * Is the socket connected?
-     *
+     * 
      * @return boolean              Status of handle: true indicates connection is active
      * @access public
      */
@@ -420,18 +421,18 @@ class wClient
     }
 
     /**
-     * Creates an association between the userid and the device registered
+     * Creates an association between the userid and the device registered 
      * by the user.
-     *
+     * 
      * @param string $uname         Users login ID in this authentication domain
-     * @param string $regcode       Registration code provided to user when
+     * @param string $regcode       Registration code provided to user when 
      *                               setting up this domain on users device
-     * @param string $domaincode    12 digit code representing this
+     * @param string $domaincode    12 digit code representing this 
      *                               authentication domain
      * @param string $passcode      Optional passcode provided by the user, to
      *                               link this device to an existing registration
      * @return int                  Result code from the registration attempt
-     *
+     * 
      * @access public
      */
     function registerUsername($username, $regcode, $domaincode, $passcode = '')
@@ -442,14 +443,15 @@ class wClient
         if (isset($passcode) && strlen($passcode) > 0) {
             $this->_dprint("Adding new device ...");
             $command = "ADDREGUSER";
-						$type = 5;
+						$type = 4;
 						$passcodeline = "<passcode>$passcode</passcode>";
 						$format = "add";
         } else {
             $this->_dprint("Registering user ...");
             $command = "REGUSER";
 						$type = 4;
-						$passcodeline = "";
+						$passcodeline = "<passcode></passcode>";
+						//$passcodeline = "";
 						$format = "new";
         }
 
@@ -464,6 +466,7 @@ class wClient
 	$passcodeline
 	<error-code>null</error-code>
 	<result>null</result>
+	<groupName>null</groupName>
 	</data>
 </transaction>
 XML;
@@ -472,25 +475,30 @@ XML;
 				$result = $xml->data->result;
 
 				$this->_dprint("result: '$result'");
-				echo "Result: $result";
+				echo "Result: $result";		
 				if ($result == "SUCCESS" || $result == "SUCESS") {
 						$validCredentials = true;
+						$this->_dprint("is valid!: '$validCredentials'");
 						return 0;
 				} else {
 						$validCredentials = false;
-						return $xml->data->{'error-code'};
+						$this->_dprint("not valid: '$validCredentials'");
+						$returnCode = $xml->data->{'error-code'};
+						if (!$returnCode) { $returnCode = -1; }
+						$this->_dprint("return code: '$returnCode'");
+						return $returnCode;
 				}
     }
 
     /**
      * Verifies credentials generated using the online mechanism.
-     *
+     * 
      * @param string $user          Users login ID in this authentication domain
      * @param string $passcode      Passcode provided by the user
-     * @param string $domaincode    12 digit code representing the
+     * @param string $domaincode    12 digit code representing the 
      *                               authentication domain
-     * @return boolean              'true' indicates credentials were valid,
-     *                               'false' if credentials were invalid or
+     * @return boolean              'true' indicates credentials were valid, 
+     *                               'false' if credentials were invalid or 
      *                               an error occurred
      * @access public
      */
@@ -535,13 +543,13 @@ XML;
      * Verifies the credentials via challenge-response.
      *
      * <b>!!! Not currently supported by the Open Source release of WiKID.</b>
-     *
+     * 
      * @ignore
-     * @return boolean              'true' indicates credentials were valid,
-     *                               'false' if credentials were invalid or
+     * @return boolean              'true' indicates credentials were valid, 
+     *                               'false' if credentials were invalid or 
      *                               an error occurred
      */
-    function chapVerify($user, $domaincode, $wikidChallenge = '',
+    function chapVerify($user, $domaincode, $wikidChallenge = '', 
                         $chapPassword = '', $chapChallenge = '')
     {
         $this->_dprint("chapVerify() called ...");
@@ -550,7 +558,7 @@ XML;
         $valid_tag = "VERIFY:VALID";
         $this->_dprint("Checking Chap Credentials");
 
-        $send = "CHAPOFFVERIFY:" . $user . "\t" . "null" . "\t" .
+        $send = "CHAPOFFVERIFY:" . $user . "\t" . "null" . "\t" . 
                 $domaincode . "\t" . $wikidChallenge;
         fflush($this->_socket);
         if ($this->_socket)
@@ -583,11 +591,11 @@ XML;
      * Fetches a list of domains served by the currently connected server code.
      *
      * <b>!!! Not currently supported by the Open Source release of WiKID.</b>
-     *
-     *
+     * 
+     * 
      * @ignore
-     * @return boolean              'true' indicates credentials were valid,
-     *                               'false' if credentials were invalid or
+     * @return boolean              'true' indicates credentials were valid, 
+     *                               'false' if credentials were invalid or 
      *                               an error occurred
      */
     function getDomains()
@@ -612,7 +620,7 @@ XML;
 
     /**
      * Prints a time-stamped (since the epoch) message if $__DEBUG is true.
-     *
+     * 
      * @param string $str           Message to print out
      * @access private
      */

@@ -9,6 +9,13 @@ class WikidAuthController extends JController
     // Register Token
     function display()
     {
+	$user =& JFactory::getUser(); 
+
+	if ( $user->get('id') == 0 ) {
+	    // You must be logged in!
+	    return JError::raiseWarning('SOME_ERROR_CODE', JText::_('You must be logged in to use this function.'));
+	}
+
 	?>
 	<script language="javascript" type="text/javascript">                                                                                                                                                                                                      
 	<!--                                                                                                                                                                                                                                                       
@@ -37,7 +44,15 @@ class WikidAuthController extends JController
 
     function register_submit()
     {
-	$username = "coolacid";
+
+	$user =& JFactory::getUser(); 
+
+	if ( $user->get('id') == 0 ) {
+	    // You must be logged in!
+	    return JError::raiseWarning('SOME_ERROR_CODE', JText::_('You must be logged in to use this function.'));
+	}
+
+	$username = $user->get('name');
 
 	// Make sure we actually have a register code.
 	$regcode = JRequest::getVar('regcode', null, 'post', 'cmd');
