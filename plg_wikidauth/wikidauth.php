@@ -1,10 +1,10 @@
 <?php
-/**
- * @package WikidAuth for Joomla! 1.5
- * @author Jason Kendall
- * @copyright (C) 2010 - OSTLabs Inc
- * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html
-**/
+/**                                                                                                                                                                                                                                                        
+ * @package WikidAuth for Joomla! 1.5                                                                                                                                                                                                                  
+ * @author Jason Kendall                                                                                                                                                                                                                                   
+ * @copyright (C) 2010 - OSTLabs Inc                                                                                                                                                                                                                       
+ * @license GNU/GPL http://www.gnu.org/copyleft/gpl.html                                                                                                                                                                                                   
+**/ 
 
 // Check to ensure this file is included in Joomla!
 defined('_JEXEC') or die( 'Restricted access' );
@@ -33,18 +33,16 @@ class plgAuthenticationWikidAuth extends JPlugin
 		// Include the required LIB files
 		require_once(dirname(__FILE__).DS.'wikidlib'.DS.'wClient.inc.php');
 
-		parent::__construct($subject, $config);
+		parent::__construct($this, $config);
 
 		$server_host = $this->params->get('server_host');
 		$server_port = $this->params->get('server_port');
 		$client_key_file = $this->params->get('client_key_file');
 		$client_key_pass = $this->params->get('client_key_pass');
-//		$server_ca_file = $this->params->get('server_ca_file');
 
 		$this->domaincode = $this->params->get('domaincode');
 
-		$this->wc = new wClient($server_host, $server_port, $client_key_file, $client_key_pass); //, $server_ca_file);
-
+		$this->wc = new wClient($server_host, $server_port, $client_key_file, $client_key_pass);
 	}
 
 	/**
@@ -63,17 +61,15 @@ class plgAuthenticationWikidAuth extends JPlugin
 	    // Do the authentication
 	    $success = $this->wc->checkCredentials($credentials['username'], $credentials['password'], $this->domaincode);
 
-            if ($success == 0)
-            {
-                    $response->status            = JAUTHENTICATE_STATUS_SUCCESS;
-                    $response->error_message = '';
-//                    $response->email        = $credentials['username'];
-//                    $response->fullname = $credentials['username'];
-            }
-            else
-            {
-                    $response->status               = JAUTHENTICATE_STATUS_FAILURE;
-                    $response->error_message        = 'Failed to authenticate: ' . $message;
+            if ($success == 0)                                                                                                                                                                                                                              
+            {                                                                                                                                                                                                                                          
+                    $response->status            = JAUTHENTICATE_STATUS_SUCCESS;                                                                                                                                                                       
+                    $response->error_message = '';                                                                                                                                                                                                     
+            }                                                                                                                                                                                                                                          
+            else                                                                                                                                                                                                                                       
+            {                                                                                                                                                                                                                                          
+                    $response->status               = JAUTHENTICATE_STATUS_FAILURE;                                                                                                                                                                    
+                    $response->error_message        = 'Failed to authenticate: ' . $message;                                                                                                                                                           
             }
 
 //	    print_r($this); die();
@@ -82,7 +78,12 @@ class plgAuthenticationWikidAuth extends JPlugin
 
 	function register($username, $regcode)
 	{
-    	    return  $this->wc->registerUsername($username, $regcode, $this->domaincode);
+    	    return  $this->wc->registerUsername($username, $regcode, $this->domaincode);                                                                                                                                                             
 
 	}
+
+	function attach() { }
+
+
 }
+
