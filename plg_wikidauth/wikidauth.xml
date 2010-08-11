@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install version="1.5" type="plugin"  group="auth">
+	<name>Authentication - WikidAuth</name>
+	<author>OSTLabs Inc</author>
+	<creationDate>Aug 2010</creationDate>
+	<copyright>Copyright (C) 2010 OSTLabs Inc. All rights reserved.</copyright>
+	<license>GNU/GPL</license>
+	<authorEmail>jason.kendall@ostlabs.com</authorEmail>
+	<authorUrl>www.ostlabs.com</authorUrl>
+	<version>1.5</version>
+	<description>Handles user authentication with the Wikid Authentication System</description>
+	<files>
+		<filename plugin="wikidauth">wikidauth.php</filename>
+	</files>
+	<params>
+	    <param name="server_host" type="text" size="20" default="" label="Wikid Server Host" description="The Wikid Server's IP/Hostname." />
+	    <param name="server_port" type="text" size="20" default="8388" label="Wikid Server Port" description="The port the Wikid Server's WAUTH listener is on. Default: 8388" />
+	    <param name="client_key_file" type="text" size="20" default="" label="Client key file location" description="The location of the client key file on the web servers drive." />
+	    <param name="client_key_pass" type="password" size="20" default="" label="Client key file passcode" description="The passphrase for the client key file." />
+	    <param name="domaincode" type="text" size="20" default="" label="Domain Code" description="The assigned domain code on the Wikid Server" />
+	</params>
+</install>
