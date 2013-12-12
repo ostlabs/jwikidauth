@@ -1,0 +1,1 @@
+Provide a authentication plugin to allow Joomla! authentication to a Wikid Authentication Server. An optional component is provided to allow users to self register tokens once logged into the Joomla! system.
